@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Priya | Happy New Year</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Indie+Flower&family=Nunito:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & BASICS --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: #121212;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fdf6e4;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* --- INTRO SCREEN --- */
+        #screen-intro {
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            transition: transform 1s ease-in-out;
+        }
+
+        .cat-meme {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin: 20px auto;
+            border: 3px solid #fff;
+        }
+
+        .big-year {
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-start {
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        /* --- MAIN SCREEN --- */
+        #screen-main {
+            padding: 20px;
+            padding-bottom: 80px;
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #d63031;
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 30px 0 15px 0;
+        }
+        
+        .section-box {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .priya-pic {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- TYPEWRITER LETTER STYLE --- */
+        .letter-paper {
+            background-image: linear-gradient(#fffdf2 1px, transparent 1px);
+            background-size: 100% 2em; /* Lines like notebook paper */
+            background-color: #fffdf2;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Indie Flower', cursive; /* Handwritten font */
+            font-size: 1.3rem;
+            line-height: 2em;
+            color: #333;
+            display: none; /* Hidden until loaded */
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #333;
+            animation: blink 0.7s infinite;
+        }
+
+        /* LOADING BAR */
+        .progress-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #ff4757;
+            transition: width 0.1s;
+        }
+
+        /* FLIP CARDS & TAPES (Compact CSS) */
+        .tape { background: #ff6b6b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; border: 2px solid #ee5253; }
+        .tape:nth-child(even) { background: #1dd1a1; border-color: #10ac84; }
+        .tape-icon { font-size: 1.5rem; }
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .flip-card { background-color: transparent; height: 180px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .flip-card-front { background-color: #fff8e1; border: 2px solid #ffeaa7; }
+        .flip-card-back { background-color: #fff; transform: rotateY(180deg); border: 2px solid #fab1a0; }
+        .tiny-img { width: 50px; height: 50px; margin-bottom: 10px; border-radius: 50%; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes blink { 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+
+    <div id="screen-intro">
+        <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">Happy New Year</p>
+        <h1 class="big-year">2026</h1>
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtY254YmF5OXB5YmF5OXB5YmF5OXB5YmF5OXB5YmF5OXB5YmF5OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Geimqs082h9ks/giphy.gif" alt="Cat" class="cat-meme">
+        <p>See what I made for you...</p>
+        <button class="btn-start" onclick="startJourney()">Open Gift 🎁</button>
+    </div>
+
+    <div id="screen-main">
+        
+        <div class="section-box">
+            <h2>Greetings!</h2>
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60" alt="Priya" class="priya-pic">
+            <p style="text-align: center; margin-top: 15px; color: #555;">
+                Thanks for making my 2025 beautiful.<br>
+                Here is a little something for you.
+            </p>
+        </div>
+
+        <h2>Tap to Flip ✨</h2>
+        <div class="card-grid">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" class="tiny-img">
+                        <strong>My wish?</strong>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>To do all the "craziest things" with you.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://media.giphy.com/media/C9x8gX02SnMIo/giphy.gif" class="tiny-img">
+                        <strong>Fact:</strong>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>You are my greatest blessing too.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Our Vibe 🎵</h2>
+        <div class="section-box" style="background: transparent; border: none; box-shadow: none;">
+            <div class="tape">
+                <span class="tape-icon">📼</span>
+                <div><strong>Perfect</strong> <div>Ed Sheeran</div></div>
+            </div>
+            <div class="tape">
+                <span class="tape-icon">📼</span>
+                <div><strong>Pehle Bhi Main</strong> <div>Animal</div></div>
+            </div>
+        </div>
+
+        <div class="section-box" style="margin-top: 40px; text-align: center;">
+            <p>One last message loading...</p>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="fill-bar"></div>
+                </div>
+                <p id="loading-text" style="font-size: 0.8rem; margin-top: 5px; color: #888;">0%</p>
+            </div>
+            
+            <div id="final-letter" class="letter-paper">
+                <span id="typewriter-text"></span><span class="cursor"></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function startJourney() {
+        document.getElementById('screen-intro').style.transform = "translateY(-100vh)";
+        setTimeout(() => {
+            document.getElementById('screen-main').style.display = "block";
+            startLoadingBar();
+        }, 500);
+    }
+
+    function startLoadingBar() {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    fillBar();
+                }
+            });
+        });
+        observer.observe(document.querySelector('.progress-container'));
+    }
+
+    function fillBar() {
+        const bar = document.getElementById('fill-bar');
+        const text = document.getElementById('loading-text');
+        
+        let width = 0;
+        const interval = setInterval(() => {
+            if (width >= 100) {
+                clearInterval(interval);
+                text.innerText = "Sent with Love ❤️";
+                // Hide bar, Show Letter
+                setTimeout(() => {
+                   document.querySelector('.progress-bar').style.display = 'none';
+                   document.getElementById('final-letter').style.display = 'block';
+                   typeWriter(); 
+                }, 500);
+            } else {
+                width++;
+                bar.style.width = width + "%";
+                text.innerText = width + "%";
+            }
+        }, 30);
+    }
+
+    // TYPEWRITER EFFECT FOR THE LETTER
+    const message = "My Dearest Priya, \n\nReading your letter was the perfect start to my year. You called me a blessing, but honestly, having you is my greatest win. \n\nI am ready for all the 'craziest things' you wrote about. Let’s make 2026 our wildest, happiest chapter yet. \n\nI promise to be there for every moment. \n\nI love you tururu! ❤️";
+    
+    let i = 0;
+    function typeWriter() {
+        if (i < message.length) {
+            const char = message.charAt(i);
+            const target = document.getElementById("typewriter-text");
+            
+            if (char === "\n") {
+                target.innerHTML += "<br>";
+            } else {
+                target.innerHTML += char;
+            }
+            i++;
+            setTimeout(typeWriter, 50); // Speed of typing
+        }
+    }
+</script>
+
+</body>
+</html>
