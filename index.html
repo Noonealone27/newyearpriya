@@ -45,13 +45,15 @@
             transition: transform 1s ease-in-out;
         }
 
-        .cat-meme {
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
+        /* Styling for Priya's Pic on Intro Screen */
+        .intro-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%; /* Makes it a circle */
             object-fit: cover;
             margin: 20px auto;
-            border: 3px solid #fff;
+            border: 4px solid #ffd700; /* Gold border */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .big-year {
@@ -98,6 +100,7 @@
             border: 1px solid #eee;
         }
 
+        /* Main Greeting Picture */
         .priya-pic {
             width: 100%;
             height: 300px;
@@ -107,52 +110,31 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* --- TYPEWRITER LETTER STYLE --- */
+        /* LETTER TYPEWRITER STYLE */
         .letter-paper {
             background-image: linear-gradient(#fffdf2 1px, transparent 1px);
-            background-size: 100% 2em; /* Lines like notebook paper */
+            background-size: 100% 2em;
             background-color: #fffdf2;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            font-family: 'Indie Flower', cursive; /* Handwritten font */
+            font-family: 'Indie Flower', cursive;
             font-size: 1.3rem;
             line-height: 2em;
             color: #333;
-            display: none; /* Hidden until loaded */
+            display: none;
             margin-top: 20px;
             border: 1px solid #e0e0e0;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background-color: #333;
-            animation: blink 0.7s infinite;
-        }
+        .cursor { display: inline-block; width: 2px; height: 1.2em; background-color: #333; animation: blink 0.7s infinite; }
 
         /* LOADING BAR */
-        .progress-container {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background-color: #ff4757;
-            transition: width 0.1s;
-        }
+        .progress-container { margin-top: 30px; text-align: center; }
+        .progress-bar { width: 100%; height: 20px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; width: 0%; background-color: #ff4757; transition: width 0.1s; }
 
-        /* FLIP CARDS & TAPES (Compact CSS) */
+        /* FLIP CARDS & TAPES */
         .tape { background: #ff6b6b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; border: 2px solid #ee5253; }
         .tape:nth-child(even) { background: #1dd1a1; border-color: #10ac84; }
         .tape-icon { font-size: 1.5rem; }
@@ -178,7 +160,9 @@
     <div id="screen-intro">
         <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">Happy New Year</p>
         <h1 class="big-year">2026</h1>
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtY254YmF5OXB5YmF5OXB5YmF5OXB5YmF5OXB5YmF5OXB5YmF5OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Geimqs082h9ks/giphy.gif" alt="Cat" class="cat-meme">
+        
+        <img src="priya.jpg" alt="Priya" class="intro-pic">
+        
         <p>See what I made for you...</p>
         <button class="btn-start" onclick="startJourney()">Open Gift 🎁</button>
     </div>
@@ -187,7 +171,7 @@
         
         <div class="section-box">
             <h2>Greetings!</h2>
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60" alt="Priya" class="priya-pic">
+            <img src="priya.jpg" alt="Priya" class="priya-pic">
             <p style="text-align: center; margin-top: 15px; color: #555;">
                 Thanks for making my 2025 beautiful.<br>
                 Here is a little something for you.
@@ -292,7 +276,7 @@
         }, 30);
     }
 
-    // TYPEWRITER EFFECT FOR THE LETTER
+    // THE REPLY LETTER
     const message = "My Dearest Priya, \n\nReading your letter was the perfect start to my year. You called me a blessing, but honestly, having you is my greatest win. \n\nI am ready for all the 'craziest things' you wrote about. Let’s make 2026 our wildest, happiest chapter yet. \n\nI promise to be there for every moment. \n\nI love you tururu! ❤️";
     
     let i = 0;
@@ -307,7 +291,7 @@
                 target.innerHTML += char;
             }
             i++;
-            setTimeout(typeWriter, 50); // Speed of typing
+            setTimeout(typeWriter, 50); 
         }
     }
 </script>
